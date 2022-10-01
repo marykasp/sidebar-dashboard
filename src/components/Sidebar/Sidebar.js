@@ -14,6 +14,7 @@ import {
   SThemeLabel,
   SThemeToggler,
   SToggleThumb,
+  SSidebarButton,
 } from "./styles";
 import { logoSVG } from "../../assets";
 
@@ -21,6 +22,7 @@ import {
   AiOutlineSearch,
   AiOutlineHome,
   AiOutlineSetting,
+  AiOutlineLeft,
 } from "react-icons/ai";
 import { MdLogout, MdOutlineAnalytics } from "react-icons/md";
 import {
@@ -30,6 +32,7 @@ import {
   BsSun,
 } from "react-icons/bs";
 import { ThemeContext } from "./../../App";
+
 const linksArray = [
   {
     label: "Home",
@@ -72,7 +75,9 @@ const Sidebar = () => {
   return (
     <SSidebar>
       <>
-        <SSidebarButton></SSidebarButton>
+        <SSidebarButton>
+          <AiOutlineLeft />
+        </SSidebarButton>
       </>
       <SLogo>
         <img src={logoSVG} alt="logo" />

@@ -11,7 +11,22 @@ export const SSidebar = styled.div`
   position: relative;
 `;
 
-export const SSidebarButton = styled.button``;
+export const SSidebarButton = styled.button`
+  ${btnReset}
+  position: absolute;
+  top: ${v.xxlSpacing};
+  right: -30px;
+  /* right: ${({ isOpen }) => (isOpen ? `-16px` : `40px`)}; */
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.bg};
+  cursor: pointer;
+`;
 
 export const SLogo = styled.div`
   width: 52px;
