@@ -4,7 +4,7 @@ import { btnReset, v } from "../../styles/variables";
 // import { Link } from "react-router-dom";
 
 export const SSidebar = styled.div`
-  width: ${v.sidebarWidth};
+  width: ${({ isOpen }) => (!isOpen ? "auto" : v.sidebarWidth)};
   background: ${({ theme }) => theme.bg};
   height: 100vh;
   padding: ${v.lgSpacing};
@@ -15,25 +15,31 @@ export const SSidebarButton = styled.button`
   ${btnReset}
   position: absolute;
   top: ${v.xxlSpacing};
-  right: -30px;
-  /* right: ${({ isOpen }) => (isOpen ? `-16px` : `40px`)}; */
+  right: ${({ isOpen }) => (isOpen ? `-16px` : `-40px`)};
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
   background: ${({ theme }) => theme.bg};
+  box-shadow: 0 0 4px ${({ theme }) => theme.bg3},
+    0 0 7px ${({ theme }) => theme.bg3};
   cursor: pointer;
+  transform: ${({ isOpen }) => (!isOpen ? "rotate(180deg)" : "initial")};
 `;
 
 export const SLogo = styled.div`
   width: 52px;
+  margin: 0 auto;
 
   img {
     max-height: 100%;
-    height: 100px;
+    height: 50px;
+    svg {
+      filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg)
+        brightness(119%) contrast(119%);
+    }
   }
 
   cursor: pointer;
@@ -56,6 +62,8 @@ export const SSearch = styled.div`
     background: transparent;
   }
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const SSearchIcon = styled.button`
@@ -77,7 +85,8 @@ export const SDivider = styled.div`
 `;
 
 export const SLinkContainer = styled.div`
-  background: transparent;
+  background: ${({ theme, isActive }) =>
+    !isActive ? "transparent" : theme.bg3};
   border-radius: ${v.borderRadius};
   margin: 8px 0;
 
@@ -122,9 +131,10 @@ export const STheme = styled.div`
   display: flex;
   align-items: center;
   font-size: 16px;
-  position: absolute;
+  height: 70%;
+  /* position: absolute;
   bottom: 40px;
-  width: calc(${v.sidebarWidth} - 50px);
+  width: calc(${v.sidebarWidth} - 50px); */
 `;
 
 export const SThemeLabel = styled.span`

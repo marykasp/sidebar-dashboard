@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
   SSidebar,
   SLogo,
@@ -30,8 +30,10 @@ import {
   BsDiagram2,
   BsMoonStars,
   BsSun,
+  // BsFillArrowDownLeftSquareFill,
 } from "react-icons/bs";
 import { ThemeContext } from "./../../App";
+import { useLocation } from "react-router-dom";
 
 const linksArray = [
   {
@@ -70,33 +72,65 @@ const secondaryLinksArray = [
     icon: <MdLogout />,
   },
 ];
+
 const Sidebar = () => {
+  const searchRef = useRef(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { theme, setTheme } = useContext(ThemeContext);
+  const { pathname } = useLocation();
+
+  const handleSearchClick = () => {
+    if (!sidebarOpen) {
+      setSidebarOpen(true);
+      // focus on input
+      searchRef.current.focus();
+    } else {
+      // search functionality
+    }
+  };
   return (
-    <SSidebar>
+    <SSidebar isOpen={sidebarOpen}>
       <>
-        <SSidebarButton>
+        <SSidebarButton
+          isOpen={sidebarOpen}
+          onClick={() => setSidebarOpen((prevState) => !prevState)}
+        >
           <AiOutlineLeft />
         </SSidebarButton>
       </>
       <SLogo>
         <img src={logoSVG} alt="logo" />
       </SLogo>
-      <SSearch>
+      <SSearch
+        onClick={handleSearchClick}
+        style={!sidebarOpen ? { width: "fit-content" } : {}}
+      >
         <SSearchIcon>
           <AiOutlineSearch />
         </SSearchIcon>
-        <input type="text" placeholder="Search" />
+        <input
+          ref={searchRef}
+          type="text"
+          placeholder="Search"
+          style={!sidebarOpen ? { width: 0, padding: 0 } : {}}
+        />
       </SSearch>
       <SDivider />
 
       {linksArray.map((link) => (
-        <SLinkContainer key={link.label}>
-          <SLink to={link.to}>
+        <SLinkContainer key={link.label} isActive={pathname === link.to}>
+          <SLink
+            to={link.to}
+            style={!sidebarOpen ? { width: "fit-content" } : {}}
+          >
             <SLinkIcon>{link.icon}</SLinkIcon>
-            <SLinkLabel>{link.label}</SLinkLabel>
-            {!!link.notifications && (
-              <SLinkNotification>{link.notifications}</SLinkNotification>
+            {sidebarOpen && (
+              <>
+                <SLinkLabel>{link.label}</SLinkLabel>
+                {!!link.notifications && (
+                  <SLinkNotification>{link.notifications}</SLinkNotification>
+                )}
+              </>
             )}
           </SLink>
         </SLinkContainer>
@@ -104,21 +138,24 @@ const Sidebar = () => {
       <SDivider />
       {secondaryLinksArray.map((link) => (
         <SLinkContainer key={link.label}>
-          <SLink to="/">
+          <SLink to="/" style={!sidebarOpen ? { width: "fit-content" } : {}}>
             <SLinkIcon>{link.icon}</SLinkIcon>
-            <SLinkLabel>{link.label}</SLinkLabel>
+            {sidebarOpen && <SLinkLabel>{link.label}</SLinkLabel>}
           </SLink>
         </SLinkContainer>
       ))}
       <SDivider />
       <STheme>
-        <SThemeLabel>
-          {theme === "light" ? (
-            <BsMoonStars isActive={theme === "dark"} />
-          ) : (
-            <BsSun isActive={theme === "dark"} />
-          )}
-        </SThemeLabel>
+        {sidebarOpen && (
+          <SThemeLabel>
+            {theme === "light" ? (
+              <BsMoonStars isActive={theme === "dark"} />
+            ) : (
+              <BsSun isActive={theme === "dark"} />
+            )}
+          </SThemeLabel>
+        )}
+
         <SThemeToggler
           isActive={theme === "dark"}
           onClick={() =>
