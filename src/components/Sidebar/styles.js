@@ -11,6 +11,8 @@ export const SSidebar = styled.div`
   position: relative;
 `;
 
+export const SSidebarButton = styled.button``;
+
 export const SLogo = styled.div`
   width: 52px;
 
@@ -111,8 +113,12 @@ export const STheme = styled.div`
 `;
 
 export const SThemeLabel = styled.span`
-  display: block;
   flex: 1;
+
+  svg {
+    font-size: 20px;
+    color: ${({ theme, isActive }) => (!isActive ? theme.text : theme.primary)};
+  }
 `;
 
 export const SThemeToggler = styled.button`
@@ -122,7 +128,8 @@ export const SThemeToggler = styled.button`
   width: 36px;
   height: 20px;
   border-radius: 10px;
-  background: ${({ theme }) => theme.bg3};
+  background: ${({ theme, isActive }) =>
+    !isActive ? theme.bg3 : theme.primary};
   position: relative;
 `;
 

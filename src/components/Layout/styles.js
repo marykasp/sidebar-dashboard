@@ -6,7 +6,7 @@ export const SLayout = styled.div`
 `;
 
 export const SMain = styled.main`
-  padding: calc(${v.smSpacing} * 2);
+  padding: calc(${v.smSpacing} * 10);
 
   h1 {
     font-size: 16px;

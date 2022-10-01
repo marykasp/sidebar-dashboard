@@ -23,7 +23,12 @@ import {
   AiOutlineSetting,
 } from "react-icons/ai";
 import { MdLogout, MdOutlineAnalytics } from "react-icons/md";
-import { BsFillBriefcaseFill, BsDiagram2 } from "react-icons/bs";
+import {
+  BsFillBriefcaseFill,
+  BsDiagram2,
+  BsMoonStars,
+  BsSun,
+} from "react-icons/bs";
 import { ThemeContext } from "./../../App";
 const linksArray = [
   {
@@ -66,6 +71,9 @@ const Sidebar = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   return (
     <SSidebar>
+      <>
+        <SSidebarButton></SSidebarButton>
+      </>
       <SLogo>
         <img src={logoSVG} alt="logo" />
       </SLogo>
@@ -99,7 +107,13 @@ const Sidebar = () => {
       ))}
       <SDivider />
       <STheme>
-        <SThemeLabel>Dark Mode</SThemeLabel>
+        <SThemeLabel>
+          {theme === "light" ? (
+            <BsMoonStars isActive={theme === "dark"} />
+          ) : (
+            <BsSun isActive={theme === "dark"} />
+          )}
+        </SThemeLabel>
         <SThemeToggler
           isActive={theme === "dark"}
           onClick={() =>
