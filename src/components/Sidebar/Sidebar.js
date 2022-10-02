@@ -29,11 +29,11 @@ import {
   BsFillBriefcaseFill,
   BsDiagram2,
   BsMoonStars,
-  BsSun,
   // BsFillArrowDownLeftSquareFill,
 } from "react-icons/bs";
-import { ThemeContext } from "./../../App";
+// import { ThemeContext } from "./../../App";
 import { useLocation } from "react-router-dom";
+import { ThemeContext } from "../../App";
 
 const linksArray = [
   {
@@ -76,7 +76,7 @@ const secondaryLinksArray = [
 const Sidebar = () => {
   const searchRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { pathname } = useLocation();
 
   const handleSearchClick = () => {
@@ -148,20 +148,11 @@ const Sidebar = () => {
       <STheme>
         {sidebarOpen && (
           <SThemeLabel>
-            {theme === "light" ? (
-              <BsMoonStars isActive={theme === "dark"} />
-            ) : (
-              <BsSun isActive={theme === "dark"} />
-            )}
+            <BsMoonStars />
           </SThemeLabel>
         )}
 
-        <SThemeToggler
-          isActive={theme === "dark"}
-          onClick={() =>
-            setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"))
-          }
-        >
+        <SThemeToggler isActive={theme === "dark"} onClick={toggleTheme}>
           <SToggleThumb style={theme === "dark" ? { right: "1px" } : {}} />
         </SThemeToggler>
       </STheme>

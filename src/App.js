@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { ThemeProvider } from "styled-components";
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/layout/Layout";
 
 import { GlobalStyle } from "./styles/globalStyles";
 import { darkTheme, lightTheme } from "./styles/theme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./components/HomePage/HomePage";
+import HomePage from "./components/homepage/HomePage";
 
 export const ThemeContext = React.createContext(null);
 
@@ -14,8 +14,12 @@ const App = () => {
   const [theme, setTheme] = useState("light");
   const themeStyle = theme === "light" ? lightTheme : darkTheme;
 
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
   return (
-    <ThemeContext.Provider value={{ setTheme, theme }}>
+    <ThemeContext.Provider value={{ toggleTheme, theme }}>
       <ThemeProvider theme={themeStyle}>
         <GlobalStyle />
         <Helmet>

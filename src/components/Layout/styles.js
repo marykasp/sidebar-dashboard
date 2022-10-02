@@ -6,9 +6,13 @@ export const SLayout = styled.div`
 `;
 
 export const SMain = styled.main`
-  padding: calc(${v.smSpacing} * 10);
+  /* padding: 20px calc(${v.smSpacing} * 4); */
+  margin: 0 auto;
+  flex: 5;
+  padding: 20px;
 
   h1 {
+    margin-top: ${v.xxlSpacing};
     font-size: 16px;
   }
 `;

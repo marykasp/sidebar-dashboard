@@ -15,7 +15,7 @@ export const SSidebarButton = styled.button`
   ${btnReset}
   position: absolute;
   top: ${v.xxlSpacing};
-  right: ${({ isOpen }) => (isOpen ? `-16px` : `-40px`)};
+  right: ${({ isOpen }) => (isOpen ? `-16px` : `-20px`)};
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -125,6 +125,7 @@ export const SLinkNotification = styled.div`
   background: ${({ theme }) => theme.primary};
   color: white;
   margin-right: ${v.mdSpacing};
+  margin-left: ${v.mdSpacing};
 `;
 
 export const STheme = styled.div`

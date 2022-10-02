@@ -1,12 +1,16 @@
 import React from "react";
 import { SLayout, SMain } from "./styles";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../sidebar/Sidebar";
+import Navbar from "../navbar/Navbar";
 
 const Layout = ({ children }) => {
   return (
     <SLayout>
       <Sidebar />
-      <SMain>{children}</SMain>
+      <SMain>
+        <Navbar />
+        {children}
+      </SMain>
     </SLayout>
   );
 };
